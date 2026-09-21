@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para você, Quinho ❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --rosa: #ff6f9f;
+    --rosa-claro: #ffb6cd;
+    --branco: #fff;
+    --texto: #f6edf1;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: var(--texto);
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 111, 159, .12), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(255, 182, 205, .08), transparent 30%),
+        linear-gradient(135deg, #0c0a0e, #171117 50%, #0b090d);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#particles {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    bottom: -20px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(255, 182, 205, .55);
+    animation: subir linear infinite;
+}
+
+@keyframes subir {
+    from {
+        transform: translateY(0);
+        opacity: 0;
+    }
+    15% { opacity: .8; }
+    100% {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
+}
+
+.heart {
+    position: absolute;
+    color: rgba(255, 111, 159, .2);
+    font-size: 18px;
+    animation: subir linear infinite;
+}
+
+.container {
+    width: min(92%, 650px);
+    position: relative;
+    z-index: 2;
+}
+
+.screen {
+    display: none;
+    animation: entrada .7s ease both;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes entrada {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(.97);
+        filter: blur(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+.card {
+    position: relative;
+    padding: 42px 38px;
+    border: 1px solid rgba(255, 255, 255, .11);
+    border-radius: 28px;
+    background: rgba(255, 255, 255, .055);
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, .45),
+        inset 0 1px rgba(255, 255, 255, .06);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    text-align: center;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(255,111,159,.2), transparent 45%);
+    pointer-events: none;
+}
+
+.emoji {
+    position: relative;
+    font-size: 52px;
+    margin-bottom: 18px;
+    animation: flutuar 2.5s ease-in-out infinite;
+}
+
+@keyframes flutuar {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+h1, h2 {
+    position: relative;
+    color: #fff;
+    margin-bottom: 18px;
+    letter-spacing: -.4px;
+}
+
+h1 {
+    font-size: clamp(28px, 6vw, 38px);
+}
+
+h2 {
+    font-size: clamp(24px, 5vw, 31px);
+}
+
+p {
+    position: relative;
+    color: #e9dfe4;
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.highlight {
+    color: #fff;
+    font-weight: 600;
+}
+
+button {
+    position: relative;
+    border: 0;
+    padding: 14px 28px;
+    border-radius: 999px;
+    color: #fff;
+    background: linear-gradient(135deg, #ff5f92, #ff83aa);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 28px rgba(255, 95, 146, .25);
+    transition: transform .2s, box-shadow .2s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 35px rgba(255, 95, 146, .38);
+}
+
+button:active {
+    transform: scale(.97);
+}
+
+.progress {
+    position: fixed;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(260px, 60%);
+    height: 3px;
+    border-radius: 99px;
+    background: rgba(255,255,255,.08);
+    z-index: 5;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: var(--rosa);
+    transition: width .5s ease;
+}
+
+.final-heart {
+    font-size: 78px;
+    margin-bottom: 12px;
+    animation: pulsar 1.3s ease-in-out infinite;
+}
+
+@keyframes pulsar {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.14); }
+}
+
+.signature {
+    color: var(--rosa-claro);
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom: 0;
+}
+
+.small {
+    color: #b9aeb4;
+    font-size: 13px;
+    margin-top: 18px;
+    margin-bottom: 0;
+}
+
+@media (max-width: 520px) {
+    .card {
+        padding: 34px 22px;
+    }
+
+    p {
+        font-size: 16px;
+        line-height: 1.72;
+    }
+
+    .emoji {
+        font-size: 45px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="particles"></div>
+
+<div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<main class="container">
+
+    <!-- 1 -->
+    <section class="screen active" id="screen1">
+        <div class="card">
+            <div class="emoji">💌</div>
+            <h1>Oi, Quinho...</h1>
+            <p>
+                Oi Iko. Oi zF.<br>
+                São tantos nomes e apelidos que eu nem sei como te chamar.
+            </p>
+            <button onclick="next(2)">tem uma coisa que quero te dizer →</button>
+        </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="screen" id="screen2">
+        <div class="card">
+            <div class="emoji">🩷</div>
+            <h2>Quero te dizer que...</h2>
+            <p>
+                Em tão pouco tempo, sua amizade se tornou
+                <span class="highlight">algo tão especial pra mim.</span>
+            </p>
+            <button onclick="next(3)">continuar →</button>
+        </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="screen" id="screen3">
+        <div class="card">
+            <div class="emoji">🥹</div>
+            <h2>Talvez seja estranho dizer isso...</h2>
+            <p>
+                Pra mim é tão assustador ver um homem demonstrar
+                que se importa tanto.
+                <br><br>
+                No caso, eu digo: é assustador eu ver que eu aceitava
+                pouco, migalhas...
+            </p>
+            <button onclick="next(4)">continuar →</button>
+        </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="screen" id="screen4">
+        <div class="card">
+            <div class="emoji">🤍</div>
+            <p>
+                E você, com tão pouco tempo, me mostrou
+                <span class="highlight">como uma mulher deve ser tratada.</span>
+            </p>
+            <p>
+                Posso estar me precipitando? Talvez.
+            </p>
+            <button onclick="next(5)">mas tem mais...</button>
+        </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="screen" id="screen5">
+        <div class="card">
+            <div class="emoji">🌙</div>
+            <p>
+                Mas você me faz enxergar que nem todas as pessoas
+                são como os vilões do nosso terrível passado.
+            </p>
+            <button onclick="next(6)">continuar →</button>
+        </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="screen" id="screen6">
+        <div class="card">
+            <div class="emoji">🫣</div>
+            <p>
+                Eu espero muito que nossa amizade dure bastante.
+                <br><br>
+                Não importa que seja longe ou perto,
+                o que vale é que tem alma, tem sentimentos
+                e tem paixão...
+            </p>
+            <button onclick="next(7)">🫣 continuar</button>
+        </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="screen" id="screen7">
+        <div class="card">
+            <div class="emoji">✨</div>
+            <h2>Sobre o que eu disse lá em cima...</h2>
+            <p>
+                Quando eu te conheci, conheci como zF.
+                Eu não sabia de nada, nem como você era...
+            </p>
+            <button onclick="next(8)">e então...</button>
+        </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="screen" id="screen8">
+        <div class="card">
+            <div class="emoji">🌷</div>
+            <p>
+                Com o passar dos tempos, eu fui te conhecendo mais
+                e você foi se libertando para que eu te conhecesse mais.
+            </p>
+            <button onclick="next(9)">continuar →</button>
+        </div>
+    </section>
+
+    <!-- 9 -->
+    <section class="screen" id="screen9">
+        <div class="card">
+            <div class="emoji">🫶</div>
+            <p>
+                Seu jeito caladão, seu jeito conselheiro,
+                seu jeito <span class="highlight">"ouvinte"</span>...
+                <br><br>
+                São tantas personalidades que você,
+                aos poucos, me fez conhecer cada uma delas.
+            </p>
+            <button onclick="next(10)">última parte...</button>
+        </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="screen" id="screen10">
+        <div class="card">
+            <div class="emoji">❤️</div>
+            <h2>Por tudo isso...</h2>
+            <p>
+                Obrigado por tudo que você faz por mim.
+                <br><br>
+                Você tem o meu coração,
+                e meu carinho.
+            </p>
+            <button onclick="next(11)">uma última coisa ❤️</button>
+        </div>
+    </section>
+
+    <!-- Final -->
+    <section class="screen" id="screen11">
+        <div class="card">
+            <div class="final-heart">❤️</div>
+            <h1>Obrigado por existir.</h1>
+            <p>
+                Espero que nossa amizade dure muito,
+                independentemente da distância.
+                <br><br>
+                <span class="highlight">
+                    Você é alguém muito especial pra mim.
+                </span>
+            </p>
+
+            <p class="signature">— malu 🩷</p>
+        </div>
+    </section>
+
+</main>
+
+<script>
+const totalScreens = 11;
+
+function next(number) {
+    document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+    });
+
+    const target = document.getElementById("screen" + number);
+    target.classList.add("active");
+
+    const progress = ((number - 1) / (totalScreens - 1)) * 100;
+    document.getElementById("progressBar").style.width = progress + "%";
+}
+
+/* Partículas */
+const particles = document.getElementById("particles");
+
+for (let i = 0; i < 40; i++) {
+    const particle = document.createElement("span");
+    particle.className = Math.random() > .7 ? "heart" : "particle";
+
+    if (particle.className === "heart") {
+        particle.textContent = "♡";
+    }
+
+    particle.style.left = Math.random() * 100 + "%";
+    particle.style.animationDuration = (6 + Math.random() * 8) + "s";
+    particle.style.animationDelay = (Math.random() * 8) + "s";
+    particle.style.fontSize = (12 + Math.random() * 12) + "px";
+
+    particles.appendChild(particle);
+}
+
+document.getElementById("progressBar").style.width = "0%";
+</script>
+
+</body>
+</html>
